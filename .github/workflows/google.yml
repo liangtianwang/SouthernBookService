@@ -23,6 +23,7 @@ env:
   GKE_ZONE: australia-southeast1-a
   GKE_CLUSTER: your-first-cluster-1
   IMAGE: pool-1
+  CLOUDSDK_PYTHON_SITEPACKAGES : 1
 
 jobs:
   setup-build-publish-deploy:
