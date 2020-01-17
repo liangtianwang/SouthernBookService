@@ -2,12 +2,13 @@
 
 ## 17/01/2020
 
-1. Setup GKE. 
+Setup GKE CI/CD:
 
-Note: The following step must be followed to be able to run GoogleCloudPlatform/github-actions/setup-gcloud@master
-a. Generate a key from GKE service account, get a json key file
-b. Encode the whole json string to base64
-c. Setup GKE_KEY to the encoded code in Secret
+The following steps must be followed to setup gcloud CLI
+
+1. Generate a key from GKE service account, get a json key file
+2. Encode the whole json string to base64
+3. Setup GKE_KEY to the encoded code in Secret
 
 ## 16/01/2020
 
