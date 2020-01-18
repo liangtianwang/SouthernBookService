@@ -16,20 +16,10 @@ jobs:
         dotnet-version: 3.1.100
     
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release       
     
-    # Step 1: Authenticate
-    - name: Authenticate
-      run: |
-         docker login docker.pkg.github.com --username liangtianwang
+    - name: Pack
+      run: dotnet pack --configuration Release
 
-    # Step 2: Tag
-    - name: Tag
-      run: |
-         docker tag IMAGE_ID docker.pkg.github.com/liangtianwang/southernbookservice/IMAGE_NAME:VERSION
-
-
-    # Step 2: Publish
-    - name: Publish      
-      run: |
-        docker push docker.pkg.github.com/liangtianwang/southernbookservice/IMAGE_NAME:VERSION
+    - name: Publish
+      run: dotnet nuget push "bin/Release/SouthernBookService.1.0.0.nupkg" --source "github"
