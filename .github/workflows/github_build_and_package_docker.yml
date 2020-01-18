@@ -1,0 +1,35 @@
+name: .NET Core
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    
+    # Step 1: Authenticate
+    - name: Authenticate
+      run: |
+         docker login docker.pkg.github.com --username liangtianwang
+
+    # Step 2: Tag
+    - name: Tag
+      run: |
+         docker tag IMAGE_ID docker.pkg.github.com/liangtianwang/southernbookservice/IMAGE_NAME:VERSION
+
+
+    # Step 2: Publish
+    - name: Publish      
+      run: |
+        docker push docker.pkg.github.com/liangtianwang/southernbookservice/IMAGE_NAME:VERSION
