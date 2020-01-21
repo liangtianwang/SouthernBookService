@@ -32,7 +32,7 @@ spec:
       - name: gke-test
         image: gcr.io/marine-cable-265311/pool-1:TAG
         ports:
-        - containerPort: 5000
+        - containerPort: 80
         resources:
           requests:
             cpu: 100m
