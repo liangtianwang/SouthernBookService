@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SouthernBookService.Models;
 using SouthernBookService.Services;
+using Microsoft.OpenApi.Models;
 
 namespace SouthernBookService
 {
@@ -38,6 +39,12 @@ namespace SouthernBookService
             services.AddSingleton<BookService>();
 
             services.AddControllers();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Southern Book API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +56,17 @@ namespace SouthernBookService
             }
 
             app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Southern Book API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
